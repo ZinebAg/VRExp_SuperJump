@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swisscom Jump & Run Demo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Game Container -->
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        
+        <!-- Start Screen Overlay -->
+        <div id="start-screen" class="overlay">
+            <div class="overlay-content">
+                <h1>Swisscom Jump & Run Demo</h1>
+                <p>
+                    <img class="inline-icon" src="img/flag.png" alt="Flag" />Reach the flag to win.<br/>
+                    <img class="inline-icon" src="img/coin.png" alt="Coin" />Collect coins to increase your discount.<br/>
+                    <img class="inline-icon" src="img/enemy.png" alt="Enemy" />Stomp on enemies to defeat them.<br/>
+                    <img class="inline-icon" src="img/antenna.png" alt="Antenna" />Avoid antennas.<br/>
+                    <img class="inline-icon" src="img/heart.png" alt="Heart" />You have three lives.
+                </p>
+                <button id="start-btn" class="btn-primary">Start Game</button>
+            </div>
+        </div>
+        
+        <!-- Game Over Overlay -->
+        <div id="game-over" class="overlay hidden">
+            <div class="overlay-content">
+                <h2>Game Over</h2>
+                <p>Try Again</p>
+                <button id="restart-btn" class="btn-primary">Restart</button>
+            </div>
+        </div>
+        
+        <!-- Victory Overlay -->
+        <div id="victory" class="overlay hidden">
+            <div class="overlay-content">
+                <h2>🎉 You win!</h2>
+                <p id="victory-message" class="victory-message"></p>
+                <p id="victory-instruction" class="victory-instruction">To access your Swisscom promotion code, please enter your email below.</p>
+                
+                <!-- Email Input Form -->
+                <div id="victory-email-form" class="victory-email-form">
+                    <input type="email" id="victory-email-input" class="victory-email-input" placeholder="your.email@example.com" required>
+                    <p id="victory-email-error" class="victory-email-error hidden">Please enter a valid email address.</p>
+                    <button id="victory-email-submit" class="btn-primary">Submit</button>
+                </div>
+                
+                <!-- Promo Code Section (initially hidden) -->
+                <div id="victory-promo-section" class="victory-promo-section hidden">
+                    <p id="victory-score" class="final-score"></p>
+                    <p id="victory-promo" class="promo-code">Your Swisscom promotion code: <strong>SWISSCOM2025</strong></p>
+                </div>
+                
+                <button id="play-again-btn" class="btn-primary">Play Again</button>
+            </div>
+        </div>
+        
+        <!-- Mobile Controls -->
+        <div id="mobile-controls" class="mobile-controls hidden">
+            <div class="control-row">
+                <button id="btn-left" class="control-btn">←</button>
+                <button id="btn-right" class="control-btn">→</button>
+            </div>
+            <div class="control-row">
+                <button id="btn-jump" class="control-btn">↑</button>
+                <button id="btn-crouch" class="control-btn">↓</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/game.js"></script>
+</body>
+</html>

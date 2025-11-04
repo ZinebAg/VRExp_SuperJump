@@ -1,0 +1,15 @@
+Implement a lives system with visible heart icons and loss rules.
+
+•⁠  ⁠Add ⁠ gameState.lives = 3 ⁠ (reset in ⁠ startGame() ⁠).
+•⁠  ⁠Use ⁠ img/heart.png ⁠ (max width 60px, maintain ratio) as the life icon.
+•⁠  ⁠Display hearts at the *top-left corner*, spaced by 12px.
+
+Life loss conditions:
+•⁠  ⁠Lose 1 life when colliding with an *enemy from the side or bottom*.
+•⁠  ⁠Lose 1 life when touching an *antenna*.
+•⁠  ⁠Stomping an enemy from above does *not* cost a life.
+•⁠  ⁠When lives reach *0*, trigger ⁠ gameOver() ⁠ and play the game over sound.
+
+UX:
+•⁠  ⁠On hit, briefly flash the player sprite and grant ~800ms invulnerability.
+•⁠  ⁠Update the hearts in real-time in the HUD.

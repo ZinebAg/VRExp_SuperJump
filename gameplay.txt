@@ -1,0 +1,67 @@
+🕹️ Super Mario Bros – 2D Gameplay Definition
+🎯 Core Concept
+A 2D side-scrolling platform game where the player controls Mario, navigating through levels filled with terrain, enemies, and collectibles to reach the goal flag within a time limit.
+⚙️ Game Loop
+Start screen → level select → gameplay → goal/lose → next level or restart.
+Win condition: reach the flagpole or castle at end of level.
+Lose condition: health = 0 (enemy hit, pitfall, timeout).
+🧍 Player (Mario)
+Attribute	Description
+Movement	2D horizontal side-scroll (X axis = move, Y axis = jump/fall)
+Controls	← / → = move; Space / A = jump; Down = crouch; Shift / B = run
+States	Small Mario (default), Super Mario (after Mushroom), Fire Mario (after Fire Flower), Invincible (after Star)
+Physics	Gravity, friction, momentum. Jump = impulse force; collisions = AABB or pixel-perfect.
+Health system	1 hit → lose power-up level → next hit = death.
+🌍 Environment
+Element	Description
+Camera	Side-scrolling, follows player, fixed Y center.
+Tileset	Grid-based world (16×16 or 32×32 px tiles). Platforms, pipes, bricks, question blocks, background.
+Collision Layers	Solid tiles, pass-through tiles, interactive tiles (blocks, power-ups).
+Boundaries	Player dies if Y < death limit (pit).
+Scrolling	World scrolls right as player moves forward.
+🧱 Objects
+Type	Behavior
+Blocks	May contain coins, power-ups, or nothing. Destroyable when Super Mario.
+Coins	+1 coin → collect sound → 100 coins = 1 extra life.
+Power-Ups	Mushroom → Super Mario; Fire Flower → Fire Mario; Star → invincible timer; 1-Up Mushroom → +1 life.
+Flagpole	Level goal trigger; score based on height of touch.
+👾 Enemies
+Enemy	Behavior
+Goomba	Walks straight, reverses on collision, dies when jumped on.
+Koopa Troopa	Walks; stomp → shell mode; shell kicks on contact.
+Piranha Plant	Moves vertically in/out of pipe; hurts on contact.
+Bullet Bill / Lakitu / Bowser	Advanced types with projectile or pattern logic.
+💥 Physics & Interaction Rules
+Player → Enemy (top collision) = enemy defeated.
+Enemy → Player (side collision) = damage or death.
+Player → Power-Up = apply upgrade state.
+Player → Coin = increment counter, play sound.
+Player → Flag = trigger level complete sequence.
+Gravity constant applied each frame; jump impulse = variable height based on press time.
+🕰️ Game Systems
+Score: awarded for enemy kills, coins, time remaining, flag height.
+Timer: countdown per level (300 s default).
+Lives: 3 default; 0 → game over screen.
+HUD: shows score, coins, world, time, lives.
+Audio: background music loop, sound FX (jump, coin, power-up, damage, flag).
+🧩 Technical Specs
+Aspect	Detail
+Dimension	2D side-scrolling (camera follows X-axis).
+Rendering	Canvas / WebGL / Pixi.js / Phaser 2D engine compatible.
+Physics	Tile-based collision (AABB); gravity constant; jump impulse force.
+Asset Structure	/sprites, /tilesets, /levels, /sounds, /scripts.
+Level Format	JSON grid (tiles + objects layers + enemy spawn list).
+Game State Machine	Title → Level → Win → Next Level / Lose → Restart.
+🧠 AI & Patterns
+Simple state machines per enemy (walk, turn, stomped, dead).
+Collision triggers via bounding boxes.
+Optional pathfinding or pattern loops for bosses.
+🪄 Visual & Audio Style
+Pixel-art sprites (16×16 or 32×32).
+Parallax backgrounds optional.
+Retro 8-bit/16-bit sound effects and music.
+🚀 Extension Ideas
+2-player mode (Mario & Luigi).
+Level editor (JSON builder).
+Save system (localStorage / backend API).
+Physics enhancements (slopes, moving platforms).

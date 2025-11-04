@@ -1,0 +1,88 @@
+{
+    "themes": {
+      "light": {
+        "name": "Swisscom Light",
+        "colors": {
+          "primary": "#001155",
+          "primaryLight": "#49A6E9",
+          "accent": "#DD0B1A",
+          "accentSecondary": "#6A2C91",
+          "background": "#FFFFFF",
+          "surface": "#F7F9FB",
+          "text": {
+            "dark": "#001155",
+            "medium": "#4A4A4A",
+            "light": "#FFFFFF"
+          },
+          "border": "#DDE1E5"
+        },
+        "typography": {
+          "fontFamily": "TheSans, sans-serif",
+          "headings": {
+            "fontWeight": "Bold",
+            "color": "#001155"
+          },
+          "body": {
+            "fontWeight": "Light",
+            "color": "#4A4A4A"
+          }
+        },
+        "visualStyle": {
+          "gradient": {
+            "from": "#001155",
+            "to": "#49A6E9",
+            "direction": "135deg"
+          },
+          "whiteSpace": "calm",
+          "iconWeight": "Bold",
+          "cornerRadius": "12px",
+          "shadow": "0 2px 12px rgba(0, 17, 85, 0.08)"
+        }
+      },
+      "dark": {
+        "name": "Swisscom Dark",
+        "colors": {
+          "primary": "#49A6E9",
+          "primaryLight": "#82C8FF",
+          "accent": "#DD0B1A",
+          "accentSecondary": "#A160C4",
+          "background": "#0A0F1F",
+          "surface": "#1A2235",
+          "text": {
+            "dark": "#FFFFFF",
+            "medium": "#B8C3D1",
+            "light": "#E6EBF3"
+          },
+          "border": "#2D3B52"
+        },
+        "typography": {
+          "fontFamily": "TheSans, sans-serif",
+          "headings": {
+            "fontWeight": "Bold",
+            "color": "#FFFFFF"
+          },
+          "body": {
+            "fontWeight": "Light",
+            "color": "#B8C3D1"
+          }
+        },
+        "visualStyle": {
+          "gradient": {
+            "from": "#001155",
+            "to": "#49A6E9",
+            "direction": "135deg"
+          },
+          "whiteSpace": "calm",
+          "iconWeight": "Bold",
+          "cornerRadius": "12px",
+          "shadow": "0 2px 12px rgba(0, 17, 85, 0.25)"
+        }
+      }
+    },
+    "meta": {
+      "author": "Tobias Hauptmann",
+      "version": "1.0",
+      "description": "Swisscom branding theme for Cursor – light & dark modes with authentic color palette, gradients, and typography."
+    }
+  }
+  

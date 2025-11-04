@@ -1,0 +1,36 @@
+
+Keep the file references consistent with other asset loads (this.load.audio(...)) and place new this.sound.play(...) calls at the appropriate events:
+
+jump sound → in the section where velocity Y is set for jumping.
+
+win sound → when the player reaches or collides with the goal/pole.
+
+gameover sound → when the GameOver scene starts.
+
+Make sure to keep the volume balanced and the code cleanly organized. Do not modify unrelated physics or HUD logic.¨
+
+
+
+
+
+
+Currently, the player dies whenever colliding or touching an enemy.
+I want to change this behavior to match the classic Mario-style stomp mechanic:
+
+If the player collides with an enemy from above (the player’s bottom touches the enemy’s top, while the player is falling or has a downward velocity), the player should stomp and kill the enemy.
+
+When this happens:
+
+Play a small bounce animation or upward velocity boost for the player (like a jump rebound).
+
+The enemy should disappear or play a short “squish” animation before being removed.
+
+For all other collisions (side or bottom contact), the player still takes damage or dies, as before.
+
+Antenna are invincible — the player can never stomp them; their collision logic remains unchanged.
+
+Keep the rest of the game logic intact.
+
+Add short comments in the code explaining where the stomp condition is checked.
+
+Make sure the bounce feels natural (not too strong or too weak).

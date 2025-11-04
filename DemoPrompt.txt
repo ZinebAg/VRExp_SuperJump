@@ -1,0 +1,36 @@
+<Goal>
+
+Keep the current game exactly as-is: no gameplay, visuals, or logic changes.
+Only update the win / victory flow so that when the player wins, instead of showing the promo code directly, we first ask for their email.
+
+</Goal>
+
+<Behavior to implement>
+1.⁠ ⁠When victory() is triggered:
+•⁠  ⁠Show a “You win!” popup using the existing victory overlay.
+•⁠  ⁠Include a message congratulating the player and explaining that to access their Swisscom promotion code, they must first enter their email.
+•⁠  ⁠Add an email input field and a submit button.
+•⁠  ⁠The promo code and related text must be completely hidden at this point not visible in any way until a valid email is submitted.
+•⁠  ⁠After submitting a valid email, the form disappears and only then the promo code and final winning message appear (without any text about the email).
+
+2.⁠ ⁠Make sure that:
+
+•⁠  ⁠The player can type normally in the email field. The previous issue happened because the game’s keyboard handlers called preventDefault() on all key events, blocking typing. Fix this by ensuring those listeners are skipped whenever the active element is an input field.
+•⁠  ⁠Only valid emails (format [something@domain.tld](mailto:something@domain.tld)) are accepted. Invalid input should display a clear red error message asking for a valid address.
+•⁠  ⁠After successful validation, the promo code and discount message appear, and the email form is hidden.
+•⁠  ⁠The final screen showing the promo code must not contain the email-related message anymore.
+
+Do not modify any other parts of the game: gameplay logic, sounds, scoring, assets, or the rest of the UI.
+Simply insert this flow into the existing victory overlay, keeping the design consistent and working smoothly on both desktop and mobile.
+</Behavior to implement>
+
+<Acceptance criteria:>
+
+•⁠  ⁠The game still plays normally.
+•⁠  ⁠On win, the player sees the “You win” message with an email form (no promo code yet).
+•⁠  ⁠Typing in the email input works without interference.
+•⁠  ⁠The promo code is only shown after a valid email submission.
+•⁠  ⁠Invalid emails trigger a red error message.
+•⁠  ⁠The final win screen does not show any leftover “enter your email” text.
+•⁠  ⁠No console errors and no impact on other gameplay systems.
+</Acceptance criteria:>

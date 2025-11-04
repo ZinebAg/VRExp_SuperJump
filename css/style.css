@@ -1,0 +1,389 @@
+/* Swisscom Jump & Run Game Styles */
+
+/* Import Swisscom colors from style.json */
+:root {
+    --primary: #001155;
+    --primary-light: #49A6E9;
+    --accent: #DD0B1A;
+    --accent-secondary: #6A2C91;
+    --background: #FFFFFF;
+    --surface: #F7F9FB;
+    --text-dark: #001155;
+    --text-medium: #4A4A4A;
+    --text-light: #FFFFFF;
+    --border: #DDE1E5;
+    --corner-radius: 12px;
+    --shadow: 0 2px 12px rgba(0, 17, 85, 0.08);
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'TheSans', sans-serif;
+    background: var(--background);
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Game Container */
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+}
+
+#game-canvas {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background: var(--primary);
+}
+
+/* Overlays */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+    pointer-events: auto;
+}
+
+.overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+}
+
+.overlay-content {
+    text-align: center;
+    color: var(--text-light);
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--corner-radius);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--shadow);
+}
+
+.overlay-content h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+.overlay-content h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+.overlay-content p {
+    font-size: 1.2rem;
+    font-weight: light;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+.promo-code {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--accent);
+    margin: 1.5rem 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.victory-message {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+.victory-instruction {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-light);
+}
+
+.victory-email-form {
+    margin: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    pointer-events: auto;
+    position: relative;
+    z-index: 1001;
+}
+
+.victory-email-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.8rem 1rem;
+    font-size: 1.1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--corner-radius);
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text-light);
+    font-family: 'TheSans', sans-serif;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    z-index: 1001;
+    position: relative;
+}
+
+.victory-email-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.victory-email-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 3px rgba(221, 11, 26, 0.2);
+}
+
+.victory-email-error {
+    color: var(--accent);
+    font-size: 0.95rem;
+    margin: -0.5rem 0 0 0;
+    font-weight: bold;
+}
+
+.victory-promo-section {
+    margin: 1.5rem 0;
+}
+
+/* Inline instruction icons */
+.inline-icon {
+    display: inline-block;
+    width: 30px !important;
+    height: 30px !important;
+    max-width: 30px;
+    max-height: 30px;
+    vertical-align: middle;
+    margin-right: 6px;
+    object-fit: contain;
+}
+
+/* Start screen instructions */
+.instructions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    margin: 1rem 0 1.5rem;
+}
+
+.instruction-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.instruction-item .icon {
+    width: 28px;
+    height: auto;
+}
+
+.instruction-item .stack {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.instruction-item .hearts .icon {
+    width: 24px;
+}
+
+/* Buttons */
+.btn-primary {
+    background: var(--accent);
+    color: var(--text-light);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: var(--corner-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+    font-family: 'TheSans', sans-serif;
+}
+
+.btn-primary:hover {
+    background: #B80915;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(221, 11, 26, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Mobile Controls */
+.mobile-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 500;
+    pointer-events: none;
+}
+
+.mobile-controls.hidden {
+    display: none;
+}
+
+.control-row {
+    display: flex;
+    gap: 2rem;
+    margin: 0.5rem 0;
+    pointer-events: auto;
+}
+
+.control-btn {
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--text-light);
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.control-btn:active {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0.95);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Move everything up by iPhone URL input field height (44px) */
+    #game-container {
+        transform: translateY(-44px);
+        height: calc(100vh + 44px);
+    }
+    
+    #game-canvas {
+        height: calc(100vh + 44px);
+    }
+    
+    .overlay {
+        height: calc(100vh + 44px);
+    }
+    
+    .mobile-controls {
+        bottom: 44px; /* Account for the upward shift */
+    }
+    
+    .overlay-content h1 {
+        font-size: 2rem;
+    }
+    
+    .overlay-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .overlay-content p {
+        font-size: 1rem;
+    }
+    
+    .promo-code {
+        font-size: 1.2rem;
+    }
+    
+    .victory-message {
+        font-size: 1.1rem;
+    }
+    
+    .victory-instruction {
+        font-size: 1rem;
+    }
+    
+    .victory-email-input {
+        font-size: 1rem;
+        padding: 0.7rem 0.9rem;
+    }
+    .instructions {
+        gap: 10px;
+        margin: 0.75rem 0 1.25rem;
+    }
+    .instruction-item .icon {
+        width: 24px;
+    }
+    .instruction-item .hearts .icon {
+        width: 20px;
+    }
+    
+    .btn-primary {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .control-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .control-row {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .overlay-content {
+        padding: 1rem;
+        margin: 1rem;
+    }
+    
+    .overlay-content h1 {
+        font-size: 1.5rem;
+    }
+    
+    .control-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+    
+    .control-row {
+        gap: 1rem;
+    }
+}

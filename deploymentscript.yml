@@ -1,0 +1,70 @@
+name: ☕ SwisscomSuperJump CI/CD Pipeline
+
+on:
+  push:
+    branches: 
+      - main
+    paths:
+      - '**'
+      - '.github/workflows/deployer.yml'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+
+# Cancel in-progress runs of the same workflow
+concurrency:
+  group: swisscomsuperjump-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Deploy Website
+  deploy-website:
+    name: ☕ Deploy SwisscomSuperJump
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || 'PRODUCTION' }}
+    
+    steps:
+      - name: 📦 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📁 List website files
+        run: |
+          echo "📂 Website files to deploy:"
+          ls -la
+          echo "📊 Total files: $(find . -maxdepth 1 -type f | wc -l)"
+
+      - name: ☕ SwisscomSuperJump
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: w00fff01.kasserver.com
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          port: 21
+          local-dir: ./
+          server-dir: /
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/Untitled/**
+            **/.github/**
+
+      - name: ✅ Success Notification
+        if: success()
+        run: |
+          echo "🎉 Coffee Manager Website deployment completed successfully!"
+          echo "☕ Website: https://swisscomsuperjump.ch"
+          echo "📅 Deployed at: $(date)"
+
+      - name: ❌ Failure Notification
+        if: failure()
+        run: |
+          echo "❌ Coffee Manager Website deployment failed!"
+          echo "Please check the workflow logs for details."
+          exit 1
