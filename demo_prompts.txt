@@ -1,5 +1,8 @@
-Implement a lives system with visible heart icons and loss rules.
+<Feature 1>
 
+Goal: Implement a lives system with visible heart icons and loss rules.
+
+Instructions:
 •⁠  ⁠Add ⁠ gameState.lives = 3 ⁠ (reset in ⁠ startGame() ⁠).
 •⁠  ⁠Use ⁠ img/heart.png ⁠ (max width 60px, maintain ratio) as the life icon.
 •⁠  ⁠Display hearts at the *top-left corner*, spaced by 12px.
@@ -13,3 +16,28 @@ Life loss conditions:
 UX:
 •⁠  ⁠On hit, briefly flash the player sprite and grant ~800ms invulnerability.
 •⁠  ⁠Update the hearts in real-time in the HUD.
+</Feature 1>
+
+
+
+
+<Feature 2>
+
+Goal: Replace all uses of the old Swiss flag image (img/flag.png) with the new Swisscom flag (img/swisscom_flag.png) everywhere in the project.
+
+
+Instructions:
+- Update every reference in the code that loads, preloads, or displays img/flag.png to use img/swisscom_flag.png instead.
+- Do not change file paths, variable names, object names, or logic — only the image source.
+- Keep all game mechanics, physics, animations, and positions exactly as they are.
+- Make sure the new flag loads correctly both in the map (tile/object layer) and in any victory or level-end scenes.
+- Double-check that the new flag is visible at the same size and position as the old one.
+- Do not touch unrelated assets (hearts, enemies, antennas, etc.).
+
+
+Acceptance criteria:
+- The game runs exactly the same.
+- The Swiss flag visuals are replaced everywhere by the new img/swisscom_flag.png.
+- No missing references or console errors.
+
+</Feature 2>
