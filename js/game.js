@@ -160,7 +160,12 @@ function loadImages() {
                 initializeGame();
             }
         };
-        img.src = `img/${name}.png`;
+        // Replace old Swiss flag with Swisscom flag asset without changing variable names
+        if (name === 'flag') {
+            img.src = 'img/swisscom_flag.png';
+        } else {
+            img.src = `img/${name}.png`;
+        }
         images[name] = img;
     });
 }
@@ -200,6 +205,26 @@ function loadSounds() {
         audio.volume = 0.5; // Set volume to 50%
         sounds[sound.name] = audio;
     });
+}
+
+// Update Lives HUD (DOM-based hearts in top-left)
+function updateLivesHUD(lives) {
+    try {
+        const container = document.getElementById('lives');
+        if (!container) return;
+        const count = Math.max(0, lives || 0);
+        // Replace contents
+        container.innerHTML = '';
+        for (let i = 0; i < count; i++) {
+            const img = document.createElement('img');
+            img.src = 'img/heart.png';
+            img.alt = 'Life';
+            img.className = 'hud-heart';
+            container.appendChild(img);
+        }
+    } catch (e) {
+        // Non-fatal UI failure
+    }
 }
 
 // Enable audio on first user interaction (required for mobile browsers)
@@ -514,6 +539,8 @@ function startGame() {
     gameState.playerState = 'standing';
     // Reset invulnerability
     player.invulnerableUntil = 0;
+    // Update HUD
+    try { updateLivesHUD(gameState.lives); } catch (e) {}
     
     // Reset camera
     camera.x = 0;
@@ -822,7 +849,7 @@ function checkCollisions() {
         height: player.height
     };
     
-    // Enemy collisions (no invulnerability check - immediate game over on contact)
+    // Enemy collisions (with stomp detection and lives)
     enemies.forEach(enemy => {
         if (!enemy.alive) return;
         
@@ -859,8 +886,11 @@ function checkCollisions() {
                 }
                 return; // Do not trigger gameOver this frame for this collision
             } else {
-                // Side/bottom contact: immediate game over (no lives system)
-                gameOver();
+                // Side/bottom contact: lose a life unless invulnerable
+                const now = performance.now();
+                if (!player.invulnerableUntil || now >= player.invulnerableUntil) {
+                    loseLife(enemy);
+                }
             }
         }
     });
@@ -876,8 +906,10 @@ function checkCollisions() {
         };
         
         if (checkCollision(playerCollisionBox, antennaCollisionBox)) {
-            // Antennas are unkillable: any contact is fatal (no stomp, immediate game over)
-            gameOver();
+            const now = performance.now();
+            if (!player.invulnerableUntil || now >= player.invulnerableUntil) {
+                loseLife(antenna);
+            }
         }
     });
     
@@ -902,12 +934,7 @@ function checkCollision(obj1, obj2) {
            obj1.y + obj1.height > obj2.y;
 }
 
-// Lose a life with brief invulnerability and knockback
-// DISABLED: Lives system temporarily simplified - immediate game over on contact
-// This function is kept for easy restoration later
 function loseLife(source) {
-    // Lives system disabled - collisions now trigger gameOver() directly
-    // Function kept intact for easy restoration
     try {
         if (gameState.currentScene !== 'play') return;
         // Prevent multi-hit within the invulnerability window
@@ -915,6 +942,8 @@ function loseLife(source) {
         if (player.invulnerableUntil && now < player.invulnerableUntil) return;
         
         gameState.lives = Math.max(0, (gameState.lives || 0) - 1);
+        // Update HUD immediately
+        try { updateLivesHUD(gameState.lives); } catch (e) {}
         
         // Set invulnerability (~800ms)
         player.invulnerableUntil = now + 800;
@@ -1052,8 +1081,17 @@ function render() {
             
             // Draw player (no camera offset - player stays in fixed screen position)
             const playerScreenX = GAME_CONFIG.width * 0.25; // Left 25% of screen
-            // Draw player (no invulnerability flashing)
+            // Flash player during invulnerability (~every 100ms)
+            const now = performance.now();
+            const flashing = player.invulnerableUntil && now < player.invulnerableUntil && (Math.floor(now / 100) % 2 === 0);
+            if (flashing) {
+                ctx.save();
+                ctx.globalAlpha = 0.4;
+            }
             ctx.drawImage(images[player.sprite], playerScreenX, player.y, player.width, player.height);
+            if (flashing) {
+                ctx.restore();
+            }
         }
         
         // Draw Heart UI (top-left, pinned to viewport) - disabled for simplified death system

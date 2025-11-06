@@ -19,8 +19,6 @@ UX:
 </Feature 1>
 
 
-
-
 <Feature 2>
 
 Goal: Replace all uses of the old Swiss flag image (img/flag.png) with the new Swisscom flag (img/swisscom_flag.png) everywhere in the project.
